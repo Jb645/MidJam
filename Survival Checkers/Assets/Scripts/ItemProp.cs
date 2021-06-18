@@ -35,7 +35,7 @@ public class ItemProp
                 break;
             case 4:
                 if (activeParams[0] == playerFront.getState()){
-                    playerFront.setContent(activeParams[1]);
+                    playerFront.setState(activeParams[1]);
                     //item lost TO DO
                 }
                 break;
@@ -56,6 +56,7 @@ public class ItemProp
         new ItemProp(6,"Wood", 1, new int[]{ }),
         new ItemProp(7,"Stone", 1, new int[]{ }),
         new ItemProp(8,"Enemy drop", 1, new int[]{ }),
+        new ItemProp(9,"Bridge", 4, new int[]{0,2})
     };
     public static int axeLevel = 1;
     public static int pickaxeLevel = 1;

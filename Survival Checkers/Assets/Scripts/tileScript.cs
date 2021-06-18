@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class tileScript : MonoBehaviour
 {
-    public int state;
+    public int state; // 0 void, 1 ground, 2 bridge, 3 infected
     public int content;
     public int cooldown;
 
