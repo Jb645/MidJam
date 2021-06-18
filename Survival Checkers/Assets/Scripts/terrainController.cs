@@ -62,26 +62,23 @@ public class terrainController : MonoBehaviour
     public void createIsland(int pos)
     {
         Vector2 pivot = new Vector2(25, verticalSpace / 2);
-        int remain = islandSize;
-        int topLine = verticalSpace - 4;
-        while (remain > 0)
-        {
-            Debug.Log("remain " + remain);
+        Vector2 safearea(int[] limits,int spread){
             Vector2 moved = new Vector2(0, 0);
-            while (moved.x == 0) {
-                moved = new Vector2(pivot.x + Random.Range(-iSpread, iSpread), pivot.y + Random.Range(-iSpread, iSpread));
-                if (moved.x < 1 || moved.x > 46 || moved.y < 1 || moved.y > topLine)
-                {
+            while (moved.x == 0){
+                moved = new Vector2(pivot.x + Random.Range(-spread, spread), pivot.y + Random.Range(-spread, spread));
+                if (moved.x < limits[0] || moved.x > limits[1] || moved.y < limits[2] || moved.y >= limits[3]){
                     moved.x = 0;
                 }
             }
-            for (int x = 0; x < 3; x++)
-            {
-                for (int y = 0; y < 3; y++)
-                {
-                    Debug.Log(x + " " + y);
-                    if (tiles[pos][x+(int)moved.x, y+(int)moved.y].getState() == 0)
-                    {
+            return moved;
+        }
+        int remain = islandSize;
+        int topLine = verticalSpace - 5;
+        while (remain > 0){
+            Vector2 moved = safearea(new int[] { 1, 46, 1, topLine }, iSpread);
+            for (int x = 0; x < 3; x++){
+                for (int y = 0; y < 3; y++){
+                    if (tiles[pos][x+(int)moved.x, y+(int)moved.y].getState() == 0){
                         remain--;
                         tiles[pos][x+(int)moved.x, y+(int)moved.y].setState(1);
                     }
@@ -90,32 +87,30 @@ public class terrainController : MonoBehaviour
             if (Random.Range(0, iSpreadChance) == 1)
                 pivot = moved;
         }
-        int notCrash = resources*5;
-        remain = resources;
-        pivot = new Vector2(25, verticalSpace / 2);
-        while (remain > 0 && notCrash > 0)
-        {
-            Vector2 moved = new Vector2(0, 0);
-            while (moved.x == 0)
-            {
-                moved = new Vector2(pivot.x + Random.Range(-rSpread, rSpread), pivot.y + Random.Range(-rSpread, rSpread));
-                if (moved.x < 0 || moved.x > 49 || moved.y < 1 || moved.y >= verticalSpace )
-                {
-                    moved.x = 0;
+        void resourceFill(int type){
+            int notCrash = resources * 5;
+            remain = resources;
+            while (remain > 0 && notCrash > 0){
+                Vector2 moved = safearea(new int[] { 0, 49, 0, verticalSpace }, rSpread);
+                notCrash--;
+                if (tiles[pos][(int)moved.x, (int)moved.y].getState() != 0){
+                    if (tiles[pos][(int)moved.x, (int)moved.y].getContent() == -1){
+                        remain--;
+                        tiles[pos][(int)moved.x, (int)moved.y].setContent(type);
+                    }
+                    if (Random.Range(0, rSpreadChance) == 1)
+                        pivot = moved;
                 }
             }
-            notCrash--;
-            if (tiles[pos][(int)moved.x, (int)moved.y].getState() != 0){
-                if (tiles[pos][(int)moved.x, (int)moved.y].getContent() == 0)
-                {
-                    remain--;
-                    tiles[pos][(int)moved.x, (int)moved.y].setContent(1);
-                }
-                if (Random.Range(0, rSpreadChance) == 1)
-                    pivot = moved;
-            }
-            
         }
+        resourceFill(0);
+        resourceFill(1);
+        pivot = new Vector2(25, verticalSpace / 2);
+        resourceFill(0);
+        resourceFill(1);
+        pivot = safearea(new int[] { 0, 49, 0, verticalSpace }, rSpread * 2);
+        resourceFill(0);
+        resourceFill(1);
     }
     public void purgeIsland(int pos)
     {

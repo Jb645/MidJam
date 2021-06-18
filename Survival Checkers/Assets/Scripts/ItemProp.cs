@@ -26,7 +26,7 @@ public class ItemProp
                 //TO DO
                 break;
             case 3:
-                if(activeParams[0] == playerFront.getContent() && playerOn.getContent() == 0){
+                if(activeParams[0] == playerFront.getContent() && playerOn.getContent() == -1){
                     playerFront.setContent(activeParams[1]);
                     playerOn.setContent(activeParams[1]);
                 } else if (playerFront.getContent() == 3){

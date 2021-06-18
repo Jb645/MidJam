@@ -34,9 +34,9 @@ public class tileScript : MonoBehaviour
                 this.transform.GetChild(0).GetChild(this.state-1).gameObject.SetActive(false);
             if (state != 0)
                 this.transform.GetChild(0).GetChild(state-1).gameObject.SetActive(true);
-            if ((state == 0 || state == 3) && content != 0){
-                this.transform.GetChild(1).GetChild(content-1).gameObject.SetActive(false);
-                content = 0;
+            if ((state == 0 || state == 3) && content != -1){
+                this.transform.GetChild(1).GetChild(content).gameObject.SetActive(false);
+                content = -1;
             }
             this.state = state;
         }
@@ -44,8 +44,11 @@ public class tileScript : MonoBehaviour
     public int getState() { return state; }
     public bool canWalk() { return (state == 1 || state == 2) && ItemProp.library[content].type != 0; }
     public void setContent(int content) {
+        if (this.content != -1)
+            this.transform.GetChild(1).GetChild(this.content).gameObject.SetActive(false);
+        if(content != -1)
+            this.transform.GetChild(1).GetChild(content).gameObject.SetActive(true);
         this.content = content;
-        this.transform.GetChild(1).GetChild(content - 1).gameObject.SetActive(true);
     }
     public int getContent() { return content; }
 }
