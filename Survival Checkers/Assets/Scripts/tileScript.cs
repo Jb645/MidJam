@@ -42,7 +42,7 @@ public class tileScript : MonoBehaviour
         }
     }
     public int getState() { return state; }
-    public bool canWalk() { return (state == 1 || state == 2); }
+    public bool canWalk() { return (state == 1 || state == 2) && ItemProp.library[content].type != 0; }
     public void setContent(int content) {
         this.content = content;
         this.transform.GetChild(1).GetChild(content - 1).gameObject.SetActive(true);

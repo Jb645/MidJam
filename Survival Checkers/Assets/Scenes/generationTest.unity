@@ -248,10 +248,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile: {fileID: 2835721062533902524, guid: ed1c80495a99ef94398ed8217d43fa3e, type: 3}
-  verticalSpace: 50
-  islandSize: 50
+  verticalSpace: 70
+  islandSize: 400
   iSpread: 4
   iSpreadChance: 8
-  resources: 12
+  resources: 19
   rSpread: 3
   rSpreadChance: 3
