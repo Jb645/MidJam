@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class tileScript : MonoBehaviour
 {
-    private int state;
-    private int content;
-    private int cooldown;
+    public int state;
+    public int content;
+    public int cooldown;
 
     void Start()
     {
         state = 0;
-        content = 0;
+        content = -1;
     }
 
     void Update()
