@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cda51227b194aef499869b394bd3fe7f, type: 3}
-  m_Name: Player
+  m_Name: enemy_Venus
   m_EditorClassIdentifier: 
-  name: Player
-  health: 100
-  artwork: {fileID: 21300000, guid: a29958b339061414eac8cd0380f75c68, type: 3}
-  Damage: 10
+  name: VenusFly
+  health: 50
+  artwork: {fileID: 21300000, guid: 4b5664ee7b5a56b4c87beaac4ba73678, type: 3}
+  Damage: 50

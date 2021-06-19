@@ -13,7 +13,7 @@ public class Entities : ScriptableObject
     
     public Sprite artwork;
 
-    public Collision2D collider;
+    public int Damage;
 
     public void Print()
     {
